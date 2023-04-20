@@ -23,9 +23,10 @@ namespace Networking {
         }
 
         public void HandleMessage(byte[] data) {
-            Debug.Log($"Got new message.");
+            
             BufferReader reader = new BufferReader(data);
             int instruction = reader.ReadInt();
+            Debug.Log($"Got new message of type {instruction}.");
             Packet_ handler = packets[instruction];
             handler(reader);
             //packets[instruction](reader);
