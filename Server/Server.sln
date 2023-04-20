@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{45F527A0-D8F8-4141-8AE4-0F2F78B193CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared\Shared.csproj", "{A07DE244-9D07-46C8-83A6-9BC0F88A63DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45F527A0-D8F8-4141-8AE4-0F2F78B193CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F527A0-D8F8-4141-8AE4-0F2F78B193CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F527A0-D8F8-4141-8AE4-0F2F78B193CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F527A0-D8F8-4141-8AE4-0F2F78B193CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07DE244-9D07-46C8-83A6-9BC0F88A63DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07DE244-9D07-46C8-83A6-9BC0F88A63DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07DE244-9D07-46C8-83A6-9BC0F88A63DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07DE244-9D07-46C8-83A6-9BC0F88A63DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

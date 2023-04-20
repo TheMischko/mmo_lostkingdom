@@ -1,0 +1,6 @@
+E:\Projects\CursedKingdom\Shared\Shared\bin\Debug\Shared.dll
+E:\Projects\CursedKingdom\Shared\Shared\bin\Debug\Shared.pdb
+E:\Projects\CursedKingdom\Shared\Shared\obj\Debug\Shared.csproj.AssemblyReference.cache
+E:\Projects\CursedKingdom\Shared\Shared\obj\Debug\Shared.csproj.CoreCompileInputs.cache
+E:\Projects\CursedKingdom\Shared\Shared\obj\Debug\Shared.dll
+E:\Projects\CursedKingdom\Shared\Shared\obj\Debug\Shared.pdb
