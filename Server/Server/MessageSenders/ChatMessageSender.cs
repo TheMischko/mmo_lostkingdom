@@ -1,10 +1,11 @@
-﻿using Server.Model.ChatModel;
+﻿using System;
+using Server.Model.ChatModel;
 using Shared.DataClasses;
 using Shared.Utils;
 
 namespace Server.MessageSenders {
     public class NewChatMessagesSender {
-        private const int instruction = 103;
+        private const int instruction = 110;
 
         public static async void SendMessage(int index) {
             BufferWriter bw = new BufferWriter();
@@ -14,6 +15,7 @@ namespace Server.MessageSenders {
                 return;
             }
             bw.WriteInt(historyFragment.messages.Count);
+            Console.WriteLine($"Got {historyFragment.messages.Count} new messages for {index}.");
             foreach (ChatMessage message in historyFragment.messages) {
                 bw.AddData(message.ToBytes());
             }
