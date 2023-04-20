@@ -35,6 +35,7 @@ namespace Server {
         private void SendTickUpdates(object state) {
             // Main update loop
             foreach (Client client in clients) {
+                if(!client.isConnected()) continue;
                 SendUpdateAsync(client);
             }
         }
@@ -70,6 +71,8 @@ namespace Server {
         }
 
         public void SendToClient(int index, byte[] data) {
+            if(clients[index].socket == null) return;
+            
             TcpClient client = clients[index].socket;
             byte[] dataToSend = new byte[client.SendBufferSize];
             for (int i = 0; i < data.Length; i++) {
