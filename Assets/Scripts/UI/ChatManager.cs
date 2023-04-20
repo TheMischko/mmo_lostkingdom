@@ -10,10 +10,15 @@ using UnityEngine.UI;
 namespace Networking.UI {
     public class ChatManager : MonoBehaviour {
         public static ChatManager instance;
-        [SerializeField] private Text text;
+        
+        [SerializeField] private Text chatOutput;
         [SerializeField] private InputField inputText;
-        private const int MaxMessages = 10;
-        private string[] messages = new string[MaxMessages];
+        
+        private const int MaxMessages = 100;
+        private const int ShowMaxMessages = 10;
+        
+        private ChatMessage[] messages = new ChatMessage[MaxMessages];
+        
         private ChatMessageType messageType = ChatMessageType.Normal;
 
         public string testMessage = "";
@@ -36,33 +41,38 @@ namespace Networking.UI {
             inputText.text = "";
         }
 
+        /**
+         * Mono behaviour loop
+         */
         private void Start() {
             ClearChat();
         }
-        
-
-        private void Update() {
-            if (send) {
-                AddMessage(testMessage);
-                send = false;
-            }
-        }
 
         private void FixedUpdate() {
-            text.text = string.Join("\n", messages);
+            string[] showMessages = new string[ShowMaxMessages];
+            for (int i = 0; i < ShowMaxMessages; i++) {
+                ChatMessage message = messages[i];
+                showMessages[i] = message.content;
+            }
+
+            chatOutput.text = string.Join("\n", showMessages);
+        }
+
+        /***
+         * Functions
+         */
+        public void AddMessage(ChatMessage message) {
+            ShiftByOne();
+            messages[0] = message;
         }
 
 
         public void ClearChat() {
             for (int i = 0; i < MaxMessages; i++) {
-                messages[i] = "";
+                messages[i] = null;
             }
-        }
 
-        public void AddMessage(string message) {
-            if(string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message)) return;
-            ShiftByOne();
-            messages[MaxMessages - 1] = message;
+            chatOutput.text = string.Empty;
         }
 
         private void ShiftByOne() {
