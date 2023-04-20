@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc523b119744e7f9c6fbe92420be32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 404168063}
+  chatOutput: {fileID: 404168063}
   inputText: {fileID: 790406990}
   testMessage: 
   send: 0
