@@ -9,7 +9,11 @@ namespace Shared.DataClasses {
         public string content;
         public DateTime timeReceived;
 
-        public ChatMessage(int socketIndex, ChatMessageType messageType, string content, DateTime? timeReceived = null) {
+        public ChatMessage(
+                int socketIndex = -1, 
+                ChatMessageType messageType = ChatMessageType.Normal, 
+                string content = "", 
+                DateTime? timeReceived = null) {
             this.socketIndex = socketIndex;
             this.messageType = messageType;
             this.content = content;
