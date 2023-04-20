@@ -26,7 +26,7 @@ namespace Server.Model.ChatModel {
             int historyIndexFrom = usersLastIndices[clientIndex];
             int newLastIndex = chatHistory.Count - 1;
             // If no new messages, send empty List
-            if (newLastIndex <= historyIndexFrom+1) {
+            if (newLastIndex <= historyIndexFrom) {
                 return new ChatHistoryFragment() {
                     lastIndex = newLastIndex, 
                     messages = new List<ChatMessage>()
@@ -34,9 +34,11 @@ namespace Server.Model.ChatModel {
             }
             // Else return latest messages.
             List<ChatMessage> latestMessages = new List<ChatMessage>();
-            for (int i = historyIndexFrom+1; i < newLastIndex; i++) {
+            for (int i = historyIndexFrom+1; i < newLastIndex+1; i++) {
                 latestMessages.Add(chatHistory[i]);
             }
+
+            usersLastIndices[clientIndex] = newLastIndex;
 
             return new ChatHistoryFragment() {
                 lastIndex = newLastIndex,
