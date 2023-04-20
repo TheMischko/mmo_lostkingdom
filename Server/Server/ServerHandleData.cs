@@ -22,6 +22,7 @@ namespace Server {
         public void HandleMessage(int index, byte[] data) {
             BufferReader reader = new BufferReader(data);
             int instruction = reader.ReadInt();
+            Console.WriteLine($"Got new message from {index} of type {instruction}");
             packets[instruction](index, reader);
         }
 
