@@ -34,6 +34,11 @@ namespace Shared.Utils {
             return reader.ReadBytes(count);
         }
 
+        public DateTime ReadDatetime() {
+            long dtBinary= reader.ReadInt64();
+            return DateTime.FromBinary(dtBinary);
+        }
+
         public void Dispose()
         {
             reader.Dispose();

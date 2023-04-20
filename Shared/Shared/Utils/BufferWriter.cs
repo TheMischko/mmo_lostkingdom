@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Shared.Utils {
     public class BufferWriter {
@@ -28,6 +29,10 @@ namespace Shared.Utils {
         public void WriteString(string value)
         {
             writer.Write(value);
+        }
+
+        public void WriteDateTime(DateTime dt) {
+            writer.Write(dt.ToBinary());
         }
 
         public void Dispose()

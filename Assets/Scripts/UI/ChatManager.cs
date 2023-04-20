@@ -2,6 +2,7 @@
 using System.Collections;
 using Networking.MessageHandlers;
 using Shared.DataClasses;
+using Shared.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,21 +14,25 @@ namespace Networking.UI {
         [SerializeField] private InputField inputText;
         private const int MaxMessages = 10;
         private string[] messages = new string[MaxMessages];
-        public UnityAction<string> OnTextInput;
+        private ChatMessageType messageType = ChatMessageType.Normal;
 
         public string testMessage = "";
         public bool send = false;
 
         private void Awake() {
             instance = this;
-            OnTextInput += AddSelfMessage;
-            OnTextInput += s => StartCoroutine(ClearInput(s));
-            inputText.onEndEdit.AddListener(OnTextInput);
+            inputText.onEndEdit.AddListener(OnMessageInputChange);
             
         }
 
-        private IEnumerator ClearInput(string message) {
-            yield return new WaitForSeconds(2f);
+        private async void OnMessageInputChange(string text) {
+            Debug.Log(text);
+            if (string.IsNullOrEmpty(text)) {
+                return;
+            }
+
+            ChatMessage message = new ChatMessage(UserManager.instance.selfUser.index, messageType, text);
+            await ClientSendData.instance.SendNewChatMessage(message);
             inputText.text = "";
         }
 
@@ -58,17 +63,6 @@ namespace Networking.UI {
             if(string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message)) return;
             ShiftByOne();
             messages[MaxMessages - 1] = message;
-        }
-
-        public void AddUserMessage(string username, string message) {
-            AddMessage(String.Format("{0, 12}: {1}", username, message));
-        }
-
-        public void AddSelfMessage(string message) {
-            UserData selfUser = UserManager.instance.selfUser;
-            if(selfUser == null) return;
-            string username = UserManager.instance.selfUser.name;
-            AddUserMessage(username, message);
         }
 
         private void ShiftByOne() {

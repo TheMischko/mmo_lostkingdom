@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Networking.MessageSenders;
+using Shared.DataClasses;
 using Shared.Utils;
 
 namespace Networking {
@@ -12,6 +14,10 @@ namespace Networking {
 
         public void SendLogin(string login, string password) {
             LoginSender.SendMessage(login, password);
+        }
+
+        public async Task SendNewChatMessage(ChatMessage message) {
+            await NewChatMessageSender.SendMessageAsync(message);
         }
     }
 }
