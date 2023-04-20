@@ -16,7 +16,7 @@ namespace Networking.MessageSenders {
                 ChatManager.instance.AddMessage(message);
                 messages[i] = message;
             }
-            Happened?.Invoke(messages);
+            Happened?.Invoke(null, messages);
         }
     }
 }
