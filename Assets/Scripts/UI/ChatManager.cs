@@ -31,7 +31,6 @@ namespace Networking.UI {
         }
 
         private async void OnMessageInputChange(string text) {
-            Debug.Log(text);
             if (string.IsNullOrEmpty(text)) {
                 return;
             }
@@ -50,9 +49,11 @@ namespace Networking.UI {
 
         private void FixedUpdate() {
             string[] showMessages = new string[ShowMaxMessages];
-            for (int i = 0; i < ShowMaxMessages; i++) {
-                ChatMessage message = messages[i];
-                showMessages[i] = message.content;
+            int startingIndex = MaxMessages - ShowMaxMessages;
+            for (int i = startingIndex; i < MaxMessages; i++) {
+                string message = messages[i] == null ? "" : messages[i].content;
+                int showMessageIndex = (i - startingIndex);
+                showMessages[showMessageIndex] = message;
             }
 
             chatOutput.text = string.Join("\n", showMessages);
@@ -63,7 +64,7 @@ namespace Networking.UI {
          */
         public void AddMessage(ChatMessage message) {
             ShiftByOne();
-            messages[0] = message;
+            messages[MaxMessages-1] = message;
         }
 
 
