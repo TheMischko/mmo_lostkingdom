@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using Networking.MessageHandlers;
+using Networking.MessageSenders;
 using Shared.DataClasses;
 using Shared.Utils;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Networking {
             packets.Add(100, HandleWelcomeMessage);
             packets.Add(101, NewPlayerConnectedHandler.Handle);
             packets.Add(102, LoginSuccessfulHandler.Handle);
+            packets.Add(110, NewChatMessagesHandler.Handle);
         }
 
         public void HandleMessage(byte[] data) {
