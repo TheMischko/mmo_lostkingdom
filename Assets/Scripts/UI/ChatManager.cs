@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Chat;
 using Networking.MessageHandlers;
 using Shared.DataClasses;
 using Shared.Enums;
@@ -20,14 +21,16 @@ namespace Networking.UI {
         private ChatMessage[] messages = new ChatMessage[MaxMessages];
         
         private ChatMessageType messageType = ChatMessageType.Normal;
+        private ChatMessageFormatter chatMessageFormatter;
 
         public string testMessage = "";
         public bool send = false;
 
         private void Awake() {
             instance = this;
+            chatMessageFormatter = new ChatMessageFormatter();
             inputText.onEndEdit.AddListener(OnMessageInputChange);
-            
+
         }
 
         private async void OnMessageInputChange(string text) {
@@ -51,7 +54,7 @@ namespace Networking.UI {
             string[] showMessages = new string[ShowMaxMessages];
             int startingIndex = MaxMessages - ShowMaxMessages;
             for (int i = startingIndex; i < MaxMessages; i++) {
-                string message = messages[i] == null ? "" : messages[i].content;
+                string message = chatMessageFormatter.Format(messages[i]);
                 int showMessageIndex = (i - startingIndex);
                 showMessages[showMessageIndex] = message;
             }
