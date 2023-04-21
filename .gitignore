@@ -1,5 +1,5 @@
 /Shared/Shared/obj
-/Assets/Scripts/Networking/MessageSenders/NewChatMessagesHandler.cs.meta
 /obj
 /Server/Server/bin
 /Server/Server/obj
+**/*.cs.meta
