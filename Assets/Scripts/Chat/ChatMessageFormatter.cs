@@ -16,7 +16,6 @@ namespace Chat {
         private string messageDateFormat = "hh:mm";
 
         public ChatMessageFormatter() {
-            userManager = UserManager.instance;
             messageFormatters =  new Dictionary<ChatMessageType, MessageFormatterMethod>();
             
             messageFormatters.Add(ChatMessageType.Normal, FormatNormalMessage);
@@ -38,7 +37,7 @@ namespace Chat {
         private string FormatNormalMessage(ChatMessage message) {
             return string.Format("{0} {1}: {2}", 
                 ColorText(message.timeReceived.ToString(messageDateFormat), ChatColors.dateColor),
-                ColorText(userManager.GetUser(message.socketIndex).name, ChatColors.userColor),
+                ColorText(UserManager.instance.GetUser(message.socketIndex).name, ChatColors.userColor),
                 ColorText(message.content, ChatColors.messageColor)
                 );
         }
@@ -46,7 +45,7 @@ namespace Chat {
             return ColorText(
                 string.Format("<b>{0} [GM]{1}: {2}</b>",
                         message.timeReceived.ToString(messageDateFormat),
-                        userManager.GetUser(message.socketIndex).name,
+                        UserManager.instance.GetUser(message.socketIndex).name,
                         message.content
                         ),
                 ChatColors.adminColor
