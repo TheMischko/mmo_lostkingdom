@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Networking.UI;
 using Shared.DataClasses;
+using Shared.Enums;
 using UnityEngine;
 
 namespace Networking {
@@ -10,12 +12,15 @@ namespace Networking {
         public Dictionary<int, UserData> users;
         public UserData selfUser;
 
+        [SerializeField] private bool gotSelf = false;
+        [SerializeField] private int countPlayers = 0;
+
         public UserData GetUser(int index) {
             UserData user = users[index];
             if (user == null) {
                 throw new Exception($"User with index {index} currently does not exist.");
             }
-
+            Debug.Log("Getting user "+user.name);
             return user;
         }
 
@@ -24,6 +29,13 @@ namespace Networking {
                 throw new Exception($"Cannot add user. User with index {user.index} already exists.");
             }
             users.Add(user.index, user);
+            countPlayers += 1;
+            ChatMessage message = new ChatMessage(
+                    -1, 
+                    ChatMessageType.Server, 
+                    $"{user.name} just connected a game.",
+                    DateTime.Now);
+            ChatManager.instance.AddMessage(message);
         }
 
         public void RemoveUser(int index) {
@@ -46,6 +58,7 @@ namespace Networking {
         public void SetSelf(UserData self) {
             selfUser = self;
             AddUser(self);
+            gotSelf = true;
         }
 
         public UserData GetSelf() {
