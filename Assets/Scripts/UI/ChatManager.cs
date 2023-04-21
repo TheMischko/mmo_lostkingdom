@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Chat;
 using Networking.MessageHandlers;
 using Shared.DataClasses;
@@ -12,25 +13,41 @@ namespace Networking.UI {
     public class ChatManager : MonoBehaviour {
         public static ChatManager instance;
         
-        [SerializeField] private Text chatOutput;
+        [SerializeField] private ScrollRect chatOutputScroll;
         [SerializeField] private InputField inputText;
+
+        [SerializeField] private GameObject chatPanel, textPrefab;
         
         private const int MaxMessages = 100;
-        private const int ShowMaxMessages = 10;
-        
-        private ChatMessage[] messages = new ChatMessage[MaxMessages];
+        private const int MessagedToDelete = 10;
+
+        private List<Message> messages;
+        private List<Message> newMessages;
         
         private ChatMessageType messageType = ChatMessageType.Normal;
         private ChatMessageFormatter chatMessageFormatter;
 
-        public string testMessage = "";
-        public bool send = false;
+        private bool isScrolling = false;
 
         private void Awake() {
             instance = this;
             chatMessageFormatter = new ChatMessageFormatter();
             inputText.onEndEdit.AddListener(OnMessageInputChange);
+            //chatOutputScroll.onValueChanged.AddListener(OnScroll);
+            messages = new List<Message>();
+            newMessages = new List<Message>();
 
+        }
+
+        private void OnScroll(Vector2 position) {
+            if (Mathf.Ceil(position.y*10)/10 == 1f) {
+                isScrolling = false;
+            }
+            else {
+                isScrolling = true;
+            }
+            
+            Debug.Log(position);
         }
 
         private async void OnMessageInputChange(string text) {
@@ -51,39 +68,75 @@ namespace Networking.UI {
         }
 
         private void FixedUpdate() {
-            string[] showMessages = new string[ShowMaxMessages];
-            int startingIndex = MaxMessages - ShowMaxMessages;
-            for (int i = startingIndex; i < MaxMessages; i++) {
-                string message = chatMessageFormatter.Format(messages[i]);
-                int showMessageIndex = (i - startingIndex);
-                showMessages[showMessageIndex] = message;
+            /*if (!isScrolling && newMessages.Count > 0) {
+                foreach (string newMessage in newMessages) {
+                    Debug.Log($"New messages: {newMessage}");
+                    chatOutput.text += $"{newMessage}\n";
+                }
+                newMessages.Clear();
+                Canvas.ForceUpdateCanvases();
             }
 
-            chatOutput.text = string.Join("\n", showMessages);
+            if (!isScrolling) {
+                chatOutputScroll.verticalNormalizedPosition = 1f;
+            }
+
+            if (!isScrolling && messages.Count > MaxMessages) {
+                for (int i = 0; i < MessagedToDelete; i++) {
+                    messages.Remove(messages[0]);
+                }
+            }*/
+            if (newMessages.Count > 0) {
+                foreach (Message newMessage in newMessages) {
+                    GameObject newText = Instantiate(textPrefab, chatPanel.transform);
+                    newMessage.textObject = newText.GetComponent<Text>();
+                    newMessage.textObject.text = newMessage.text;
+                    messages.Add(newMessage);
+                }
+                newMessages.Clear();
+            }
         }
 
         /***
          * Functions
          */
         public void AddMessage(ChatMessage message) {
-            ShiftByOne();
-            messages[MaxMessages-1] = message;
+            if (messages.Count >= MaxMessages) {
+                for (int i = 0; i < MessagedToDelete; i++) {
+                    Destroy(messages[0].textObject.gameObject);
+                    messages.Remove(messages[0]);
+                }
+            }
+            string messageString = chatMessageFormatter.Format(message);
+
+            Message messageObject = new Message {
+                message = message,
+                text = messageString
+            };
+
+            newMessages.Add(messageObject);
         }
 
 
         public void ClearChat() {
-            for (int i = 0; i < MaxMessages; i++) {
-                messages[i] = null;
-            }
-
-            chatOutput.text = string.Empty;
-        }
-
-        private void ShiftByOne() {
-            for (int i = 0; i < MaxMessages-1; i++) {
-                messages[i] = messages[i + 1];
+            messages.Clear();
+            newMessages.Clear();
+            int children = chatPanel.transform.childCount;
+            for (int i = 0; i < children; i++) {
+                Destroy(chatPanel.transform.GetChild(0).gameObject);
             }
         }
         
+        public void OnScrollEnd() {
+            isScrolling = false;
+        }
+
+    }
+
+    [System.Serializable]
+    public class Message {
+        public ChatMessage message;
+        public string text;
+        public Text textObject;
     }
 }
