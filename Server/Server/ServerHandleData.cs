@@ -13,7 +13,7 @@ namespace Server {
 
         public void InitMessages() {
             packets = new Dictionary<int, Packet_>();
-            packets.Add(1, HandleNewRegistration);
+            packets.Add(1, RegisterHandler.Handle);
             packets.Add(2, HandleLogin);
             packets.Add(3, ChatMessageHandler.Handle);
         }
@@ -26,13 +26,6 @@ namespace Server {
             packets[instruction](index, reader);
         }
 
-        private void HandleNewRegistration(int index, BufferReader reader) {
-            string login = reader.ReadString();
-            string email = reader.ReadString();
-            string password = reader.ReadString();
-            Console.WriteLine($"New account: {login}, {password}, {email}");
-        }
-        
         private void HandleLogin(int index, BufferReader reader) {
             LoginHandler.Handle(index, reader);
         }
