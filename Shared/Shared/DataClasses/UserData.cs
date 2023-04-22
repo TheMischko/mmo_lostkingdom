@@ -4,6 +4,7 @@ namespace Shared.DataClasses {
     public class UserData:IBufferable {
         public int index;
         public string name;
+        public long accountId;
 
         public UserData(int index, string name) {
             this.index = index;
