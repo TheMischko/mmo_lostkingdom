@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
@@ -45,7 +46,7 @@ namespace Server {
             NewChatMessagesSender.SendMessage(index);
         }
 
-        private void OnClientConnect(IAsyncResult result) {
+        private async void OnClientConnect(IAsyncResult result) {
             TcpClient client = serverSocket.EndAcceptTcpClient(result);
             client.NoDelay = false;
             serverSocket.BeginAcceptTcpClient(OnClientConnect, null);
@@ -58,8 +59,7 @@ namespace Server {
                     // Send welcome MSG.
                     UserData[] userData = GetConnectedPlayers().Map(c => c.userData).ToArray();
                     byte[] welcomeMessage = ServerSendData.instance.SendWelcomeMessage(i, userData);
-                    SendToClient(i, welcomeMessage);
-                    //Broadcast(ServerSendData.instance.SendNewPlayerConnectedMessage(clients[i].userData));
+                    await SendToClientAsync(i, welcomeMessage);
                     return;
                 }
             }
@@ -96,10 +96,12 @@ namespace Server {
             await stream.FlushAsync();
         }
 
-        public void Broadcast(byte[] data) {
+        public async Task Broadcast(byte[] data, int[] skipIndices = null) {
+            List<int> indicesToSkip = skipIndices == null ? new List<int>() : new List<int>(skipIndices);
             for (int i = 1; i < MAX_PLAYERS; i++) {
                 if (clients[i].socket != null) {
-                    SendToClient(i, data);
+                    if(indicesToSkip.Contains(clients[i].index)) continue;
+                    await SendToClientAsync(i, data);
                 }
             }
         }
