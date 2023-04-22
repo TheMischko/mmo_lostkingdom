@@ -8,7 +8,7 @@ using ServiceStack.OrmLite.MySql;
 namespace Database {
     public class Database {
         public static Database instance = new Database();
-        private IDbConnection connection;
+        public IDbConnection connection;
         
         private const string ConnectionString = "Server=127.0.0.1;Database=db_lostkingdom;Uid=root;Pwd=;";
 
