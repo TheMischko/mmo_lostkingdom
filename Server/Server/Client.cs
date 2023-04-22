@@ -49,7 +49,7 @@ namespace Server {
                 byte[] newBytes = null;
                 Array.Resize(ref newBytes, streamBytesCount);
                 Buffer.BlockCopy(readBuffer, 0, newBytes, 0, streamBytesCount);
-                Console.WriteLine("Got new message.");
+
                 BufferReader bufferReader = new BufferReader(newBytes);
                 
                 // Handle data

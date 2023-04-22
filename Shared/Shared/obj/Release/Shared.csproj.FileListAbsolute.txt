@@ -1,6 +1,0 @@
-E:\Projects\CursedKingdom\Packages\Shared\Shared.dll
-E:\Projects\CursedKingdom\Packages\Shared\Shared.pdb
-E:\Projects\CursedKingdom\Shared\Shared\obj\Release\Shared.csproj.AssemblyReference.cache
-E:\Projects\CursedKingdom\Shared\Shared\obj\Release\Shared.csproj.CoreCompileInputs.cache
-E:\Projects\CursedKingdom\Shared\Shared\obj\Release\Shared.dll
-E:\Projects\CursedKingdom\Shared\Shared\obj\Release\Shared.pdb

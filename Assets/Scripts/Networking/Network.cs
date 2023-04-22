@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace Networking {
     public class Network : MonoBehaviour {
@@ -24,6 +25,12 @@ namespace Networking {
             NetworkStream stream = playerSocket.GetStream();
             stream.Write(data, 0, data.Length);
             stream.Flush();
+        }
+
+        public async Task SendDataAsync(byte[] data) {
+            NetworkStream stream = playerSocket.GetStream();
+            await stream.WriteAsync(data, 0, data.Length);
+            await stream.FlushAsync();
         }
 
         private void Awake() {

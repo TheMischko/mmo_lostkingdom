@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using Networking.MessageHandlers;
+using Networking.MessageSenders;
 using Shared.DataClasses;
 using Shared.Utils;
 using UnityEngine;
@@ -16,17 +17,25 @@ namespace Networking {
         public void InitMessages() {
             packets = new Dictionary<int, Packet_>();
             packets.Add(100, HandleWelcomeMessage);
-            packets.Add(101, NewPlayerConnectedHandler.Handle);
             packets.Add(102, LoginSuccessfulHandler.Handle);
+            LoginSuccessfulHandler.Happened += OnLoginAddHandlers;
         }
 
         public void HandleMessage(byte[] data) {
-            Debug.Log($"Got new message.");
+            
             BufferReader reader = new BufferReader(data);
             int instruction = reader.ReadInt();
+            Debug.Log($"Got new message of type {instruction}.");
+            if (!packets.ContainsKey(instruction)) {
+                return;
+            }
             Packet_ handler = packets[instruction];
             handler(reader);
-            //packets[instruction](reader);
+        }
+
+        private void OnLoginAddHandlers(object sender, UserData e) {
+            packets.Add(101, NewPlayerConnectedHandler.Handle);
+            packets.Add(110, NewChatMessagesHandler.Handle);
         }
 
         private void HandleWelcomeMessage(BufferReader reader) {

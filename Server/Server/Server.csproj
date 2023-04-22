@@ -131,8 +131,12 @@
         <Compile Include="Client.cs" />
         <Compile Include="Database\Database.cs" />
         <Compile Include="Database\Schemas\UserAccount.cs" />
+        <Compile Include="MessageHandlers\ChatMessageHandler.cs" />
         <Compile Include="MessageHandlers\LoginHandler.cs" />
+        <Compile Include="MessageSenders\ChatMessageSender.cs" />
         <Compile Include="MessageSenders\LoginSuccessfulSender.cs" />
+        <Compile Include="MessageSenders\PlayerConnectedSender.cs" />
+        <Compile Include="Model\ChatModel\ChatModel.cs" />
         <Compile Include="Network.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

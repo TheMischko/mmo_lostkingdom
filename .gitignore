@@ -1,0 +1,6 @@
+/Shared/Shared/obj
+/obj
+/Server/Server/bin
+/Server/Server/obj
+**/*.cs.meta
+/~$data-senteces.xlsx

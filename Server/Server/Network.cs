@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
+using Server.MessageSenders;
+using Server.Model.ChatModel;
 using ServiceStack;
 using Shared.DataClasses;
 
@@ -14,6 +18,8 @@ namespace Server {
         public static Network instance = new Network();
         public static Client[] clients = new Client[MAX_PLAYERS];
 
+        private Timer tickTimer;
+
         public void ServerStart() {
             for (int i = 0; i < MAX_PLAYERS; i++) {
                 clients[i] = new Client();
@@ -23,9 +29,24 @@ namespace Server {
             serverSocket.Start();
             serverSocket.BeginAcceptTcpClient(OnClientConnect, null);
             Console.WriteLine($"Server has started on port {PORT}.");
+
+            tickTimer = new Timer(SendTickUpdates,null, TimeSpan.Zero, TimeSpan.FromMilliseconds(100));
         }
 
-        private void OnClientConnect(IAsyncResult result) {
+        private void SendTickUpdates(object state) {
+            // Main update loop
+            foreach (Client client in clients) {
+                if(!client.isConnected()) continue;
+                SendUpdateAsync(client);
+            }
+        }
+
+        private async Task SendUpdateAsync(Client client) {
+            int index = client.index;
+            NewChatMessagesSender.SendMessage(index);
+        }
+
+        private async void OnClientConnect(IAsyncResult result) {
             TcpClient client = serverSocket.EndAcceptTcpClient(result);
             client.NoDelay = false;
             serverSocket.BeginAcceptTcpClient(OnClientConnect, null);
@@ -38,8 +59,7 @@ namespace Server {
                     // Send welcome MSG.
                     UserData[] userData = GetConnectedPlayers().Map(c => c.userData).ToArray();
                     byte[] welcomeMessage = ServerSendData.instance.SendWelcomeMessage(i, userData);
-                    SendToClient(i, welcomeMessage);
-                    //Broadcast(ServerSendData.instance.SendNewPlayerConnectedMessage(clients[i].userData));
+                    await SendToClientAsync(i, welcomeMessage);
                     return;
                 }
             }
@@ -51,6 +71,8 @@ namespace Server {
         }
 
         public void SendToClient(int index, byte[] data) {
+            if(clients[index].socket == null) return;
+            
             TcpClient client = clients[index].socket;
             byte[] dataToSend = new byte[client.SendBufferSize];
             for (int i = 0; i < data.Length; i++) {
@@ -61,11 +83,25 @@ namespace Server {
             stream.Write(dataToSend, 0, dataToSend.Length);
             stream.Flush();
         }
+        
+        public async Task SendToClientAsync(int index, byte[] data) {
+            TcpClient client = clients[index].socket;
+            byte[] dataToSend = new byte[client.SendBufferSize];
+            for (int i = 0; i < data.Length; i++) {
+                dataToSend[i] = data[i];
+            }
+            NetworkStream stream = client.GetStream();
+            Console.WriteLine($"Sending data of size: {dataToSend.Length}");
+            await stream.WriteAsync(dataToSend, 0, dataToSend.Length);
+            await stream.FlushAsync();
+        }
 
-        public void Broadcast(byte[] data) {
+        public async Task Broadcast(byte[] data, int[] skipIndices = null) {
+            List<int> indicesToSkip = skipIndices == null ? new List<int>() : new List<int>(skipIndices);
             for (int i = 1; i < MAX_PLAYERS; i++) {
                 if (clients[i].socket != null) {
-                    SendToClient(i, data);
+                    if(indicesToSkip.Contains(clients[i].index)) continue;
+                    await SendToClientAsync(i, data);
                 }
             }
         }
