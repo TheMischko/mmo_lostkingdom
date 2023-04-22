@@ -59,14 +59,14 @@
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewChatMessageSender.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\NewPlayerConnectedHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\LoginSender.cs" />
+     <Compile Include="Assets\Scripts\Chat\ChatMessageFormatter.cs" />
      <Compile Include="Assets\Scripts\Networking\ClientReadData.cs" />
      <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewChatMessagesHandler.cs" />
      <Compile Include="Assets\Scripts\UI\ChatManager.cs" />
      <Compile Include="Assets\Scripts\Networking\Network.cs" />
-     <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
-     <Compile Include="Assets\Scripts\Chat\ChatMessageFormatter.cs" />
      <Compile Include="Assets\Scripts\Chat\ChatColors.cs" />
+     <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
      <None Include="Assets\ParrelSync\VERSION.txt" />
  <Reference Include="UnityEngine">
  <HintPath>E:/Program Files/Unity/2020.3.29f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
