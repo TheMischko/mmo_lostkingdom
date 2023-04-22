@@ -17,13 +17,5 @@ namespace Server {
 
             return bw.ToArray();
         }
-
-        public byte[] SendNewPlayerConnectedMessage(UserData user) {
-            BufferWriter bw = new BufferWriter();
-            int instruction = 101;
-            bw.WriteInt(instruction);
-            bw.AddData(user.ToBytes());
-            return bw.ToArray();
-        }
     }
 }
