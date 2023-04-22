@@ -28,6 +28,8 @@ namespace Networking {
             if (users.ContainsKey(user.index)) {
                 throw new Exception($"Cannot add user. User with index {user.index} already exists.");
             }
+            // Don't add players if not connected.
+            if(selfUser == null) return;
             users.Add(user.index, user);
             countPlayers += 1;
             ChatMessage message = new ChatMessage(
