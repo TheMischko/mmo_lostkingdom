@@ -59,7 +59,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void SendRegisterTest() {
-        ClientSendData.instance.SendAccount("test", "email", "password");
+        ClientSendData.instance.SendAccount("test", "email@email.com", "password");
     }
 
     public void SendLoginTest() {
