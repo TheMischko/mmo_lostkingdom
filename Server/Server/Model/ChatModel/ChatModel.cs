@@ -18,6 +18,10 @@ namespace Server.Model.ChatModel {
             chatHistory.Add(message);
         }
 
+        public void AddNewChatListener(int clientIndex) {
+            usersLastIndices[clientIndex] = chatHistory.Count - 1;
+        }
+
         public ChatHistoryFragment GetNewMessages(int clientIndex) {
             if (!usersLastIndices.ContainsKey(clientIndex)) {
                 usersLastIndices[clientIndex] = -1;
