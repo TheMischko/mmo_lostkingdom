@@ -18,6 +18,8 @@ namespace Networking {
             packets = new Dictionary<int, Packet_>();
             packets.Add(100, HandleWelcomeMessage);
             packets.Add(102, LoginSuccessfulHandler.Handle);
+            
+            packets.Add(200, SuccessCreatedAccountHandler.Handle);
             LoginSuccessfulHandler.Happened += OnLoginAddHandlers;
         }
 
