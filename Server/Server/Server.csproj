@@ -137,6 +137,7 @@
         <Compile Include="MessageSenders\ChatMessageSender.cs" />
         <Compile Include="MessageSenders\LoginSuccessfulSender.cs" />
         <Compile Include="MessageSenders\PlayerConnectedSender.cs" />
+        <Compile Include="MessageSenders\UserSuccessfullyCreated.cs" />
         <Compile Include="Model\ChatModel\ChatModel.cs" />
         <Compile Include="Model\UserModel\UserInputValidator.cs" />
         <Compile Include="Model\UserModel\UserModel.cs" />
