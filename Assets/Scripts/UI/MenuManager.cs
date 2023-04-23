@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using Networking;
 using Networking.MessageHandlers;
 using Shared.DataClasses;
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour {
     public GameObject registerMenu;
 
     private bool hideMenuSig = false;
+    private bool switchMenusSig = true;
 
 
     public Menu _menu;
@@ -25,6 +27,7 @@ public class MenuManager : MonoBehaviour {
     
     public void ChangeMenu(int menu) {
         _menu = (Menu) menu;
+        switchMenusSig = true;
     }
     
     private void Awake() {
@@ -42,19 +45,20 @@ public class MenuManager : MonoBehaviour {
             gameObject.SetActive(false);
             hideMenuSig = false;
         }
-        switch (_menu) {
-            case Menu.Loading:
-                DisableMenus();
-                loadingMenu.SetActive(true);
-                break;
-            case Menu.Home:
-                DisableMenus();
-                homeMenu.SetActive(true);
-                break;
-            case Menu.Register:
-                DisableMenus();
-                registerMenu.SetActive(true);
-                break;
+
+        if (switchMenusSig) {
+            switchMenusSig = false;
+            switch (_menu) {
+                case Menu.Loading:
+                    SwitchMenu(loadingMenu);
+                    break;
+                case Menu.Home:
+                    SwitchMenu(homeMenu);
+                    break;
+                case Menu.Register:
+                    SwitchMenu(registerMenu);
+                    break;
+            }
         }
     }
 
@@ -70,5 +74,15 @@ public class MenuManager : MonoBehaviour {
         loadingMenu.SetActive(false);
         homeMenu.SetActive(false);
         registerMenu.SetActive(false);
+    }
+
+    private void SwitchMenu(GameObject menuToEnable) {
+        bool showLoadingMenu = this.loadingMenu == menuToEnable;
+        bool showHomeMenu = this.homeMenu == menuToEnable;
+        bool showRegisterMenu = this.registerMenu == menuToEnable;
+        
+        loadingMenu.SetActive(showLoadingMenu);
+        homeMenu.SetActive(showHomeMenu);
+        registerMenu.SetActive(showRegisterMenu);
     }
 }
