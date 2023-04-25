@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using Networking.MessageHandlers;
 using Networking.MessageSenders;
 using Shared.DataClasses;
+using Shared.Enums;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,10 +29,17 @@ namespace UI {
             alert.Hide();
             LoginSender.SendMessage(username, passwordText);
             LoginSuccessfulHandler.Happened += OnSuccessfulLogin;
+            ErrorHandler.AddListener(ErrorType.LoginError, OnLoginError);
+        }
+
+        private void OnLoginError(object sender, string error) {
+            alert.ShowMessage(error, AlertType.Error);
+            ErrorHandler.RemoveListener(ErrorType.LoginError, OnLoginError);
         }
 
         private void OnSuccessfulLogin(object sender, UserData e) {
             alert.ShowMessage("Login was successful.", AlertType.Success);
+            LoginSuccessfulHandler.Happened -= OnSuccessfulLogin;
         }
 
         private string GetValidationErrors(string username, string passwordText) {
