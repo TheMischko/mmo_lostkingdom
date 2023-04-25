@@ -135,6 +135,7 @@
         <Compile Include="MessageHandlers\LoginHandler.cs" />
         <Compile Include="MessageHandlers\RegisterHandler.cs" />
         <Compile Include="MessageSenders\ChatMessageSender.cs" />
+        <Compile Include="MessageSenders\ErrorSender.cs" />
         <Compile Include="MessageSenders\LoginSuccessfulSender.cs" />
         <Compile Include="MessageSenders\PlayerConnectedSender.cs" />
         <Compile Include="MessageSenders\UserSuccessfullyCreated.cs" />
