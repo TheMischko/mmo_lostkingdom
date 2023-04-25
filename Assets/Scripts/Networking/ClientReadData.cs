@@ -20,6 +20,8 @@ namespace Networking {
             packets.Add(102, LoginSuccessfulHandler.Handle);
             
             packets.Add(200, SuccessCreatedAccountHandler.Handle);
+
+            packets.Add(400, ErrorHandler.Handle);
             LoginSuccessfulHandler.Happened += OnLoginAddHandlers;
         }
 
