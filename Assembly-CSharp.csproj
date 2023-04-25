@@ -52,14 +52,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\UI\LoginForm.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\SuccessCreatedAccountHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\UserManager.cs" />
      <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewAccountSender.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\LoginSuccessfulHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewChatMessageSender.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\PlayerInputMovement.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\BaseMovement.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\NewPlayerConnectedHandler.cs" />
+     <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\LoginSender.cs" />
+     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
      <Compile Include="Assets\Scripts\Chat\ChatMessageFormatter.cs" />
      <Compile Include="Assets\Scripts\Networking\ClientReadData.cs" />
      <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
@@ -67,15 +72,11 @@
      <Compile Include="Assets\Scripts\UI\ChatManager.cs" />
      <Compile Include="Assets\Scripts\UI\Alert.cs" />
      <Compile Include="Assets\Scripts\Networking\Network.cs" />
-     <Compile Include="Assets\Scripts\UI\RegisterForm.cs" />
      <Compile Include="Assets\Scripts\Chat\ChatColors.cs" />
-     <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
-     <Compile Include="Assets\Scripts\UI\LoginForm.cs" />
+     <Compile Include="Assets\Scripts\UI\RegisterForm.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\ErrorHandler.cs" />
-     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
-     <Compile Include="Assets\Scripts\Game\Movement\BaseMovement.cs" />
-     <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Game\Movement\PlayerInputMovement.cs" />
+     <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\CameraFollow.cs" />
      <None Include="Assets\ParrelSync\VERSION.txt" />
  <Reference Include="UnityEngine">
  <HintPath>E:/Program Files/Unity/2020.3.29f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -695,11 +696,14 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
- <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <Reference Include="Unity.InputSystem">
+ <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
  <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PlasticSCM.Editor">
+ <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -736,9 +740,6 @@
  </Reference>
  <Reference Include="Unity.2D.SpriteShape.Runtime">
  <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.InputSystem">
- <HintPath>E:/Projects/CursedKingdom/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
