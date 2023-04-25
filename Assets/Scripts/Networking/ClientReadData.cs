@@ -28,6 +28,7 @@ namespace Networking {
         public void HandleMessage(byte[] data) {
             
             BufferReader reader = new BufferReader(data);
+            ulong serverTick = reader.ReadULong();
             int instruction = reader.ReadInt();
             Debug.Log($"Got new message of type {instruction}.");
             if (!packets.ContainsKey(instruction)) {
