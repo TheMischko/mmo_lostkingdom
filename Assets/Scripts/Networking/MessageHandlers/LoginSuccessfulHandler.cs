@@ -9,7 +9,6 @@ namespace Networking.MessageHandlers {
         public static void Handle(BufferReader reader) {
             UserData user = UserData.FromBytesFactory(reader);
             UserManager.instance.SetSelf(user);
-            Debug.Log("Login successful.");
             Happened?.Invoke(null, user);
         }
     }
