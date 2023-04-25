@@ -34,11 +34,13 @@ namespace Server.Model.UserModel {
             }
             
             // Add new user
-            string password = HashPassword(passwordRaw);
+            byte[] salt = GenerateSalt();
+            string password = HashPassword(passwordRaw, salt);
             User_Account newAccount = new User_Account() {
                 login = username,
                 email = email,
-                pasword = password
+                pasword = password,
+                passwordSalt = Convert.ToBase64String(salt)
             };
             long id = await Database.Database.instance.connection.InsertAsync(newAccount);
             Console.WriteLine($"Registered a new user: {username}");
@@ -63,7 +65,7 @@ namespace Server.Model.UserModel {
 
             User_Account user = users.First();
 
-            bool isPasswordMatching = DoesPasswordsMatch(password, user.pasword);
+            bool isPasswordMatching = DoesPasswordsMatch(password, user.pasword, user.passwordSalt);
             if (!isPasswordMatching) {
                 return new ResultInfo<User_Account>(Status.Error, null, "Password: Wrong password.");
             }
@@ -74,9 +76,14 @@ namespace Server.Model.UserModel {
             return new ResultInfo<User_Account>(Status.Ok, user);
         }
 
-        private static string HashPassword(string passwordRaw) {
+        private byte[] GenerateSalt() {
             byte[] salt = new byte[16];
             new RNGCryptoServiceProvider().GetBytes(salt);
+            return salt;
+        }
+
+        private static string HashPassword(string passwordRaw, byte[] salt) {
+            
 
             byte[] passwordSalted = Encoding.UTF8.GetBytes(passwordRaw).Concat(salt).ToArray();
             byte[] hashedBytes = new SHA256Managed().ComputeHash(passwordSalted);
@@ -85,9 +92,9 @@ namespace Server.Model.UserModel {
             return hashedPassword;
         }
 
-        private static bool DoesPasswordsMatch(string userPassword, string hashedPassword) {
+        private static bool DoesPasswordsMatch(string userPassword, string hashedPassword, string passwordSalt) {
             byte[] hashedStored = Convert.FromBase64String(hashedPassword);
-            byte[] salt = hashedStored.Skip(32).ToArray();
+            byte[] salt = Convert.FromBase64String(passwordSalt);
             
             byte[] passwordSalted = Encoding.UTF8.GetBytes(userPassword).Concat(salt).ToArray();
             byte[] hashedUserPassword = new SHA256Managed().ComputeHash(passwordSalted);
