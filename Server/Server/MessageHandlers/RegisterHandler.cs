@@ -3,6 +3,7 @@ using Server.MessageSenders;
 using Server.Model.UserModel;
 using Server.Utils;
 using Shared.DataClasses;
+using Shared.Enums;
 using Shared.Utils;
 
 
@@ -15,8 +16,7 @@ namespace Server.MessageHandlers {
             Console.WriteLine("Creating a new account.");
             ResultInfo<long> result = await UserModel.instance.Register(login, email, passwordRaw);
             if (result.status == Status.Error) {
-                // Handle error.
-                Console.WriteLine("Error: " + result.message);
+                await ErrorSender.SendMessage(index, ErrorType.RegistrationError, result.message);
                 return;
             }
             
