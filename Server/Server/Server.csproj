@@ -131,6 +131,7 @@
         <Compile Include="Client.cs" />
         <Compile Include="Database\Database.cs" />
         <Compile Include="Database\Schemas\UserAccount.cs" />
+        <Compile Include="GameServer.cs" />
         <Compile Include="MessageHandlers\ChatMessageHandler.cs" />
         <Compile Include="MessageHandlers\LoginHandler.cs" />
         <Compile Include="MessageHandlers\RegisterHandler.cs" />
