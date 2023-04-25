@@ -5,7 +5,7 @@ namespace Server {
     public class ServerSendData {
         public static ServerSendData instance = new ServerSendData();
 
-        public byte[] SendWelcomeMessage(int index, UserData[] currentlyConnected) {
+        public void SendWelcomeMessage(int index, UserData[] currentlyConnected) {
             BufferWriter bw = new BufferWriter();
             int instruction = 100;
             bw.WriteInt(instruction);
@@ -15,7 +15,7 @@ namespace Server {
                 bw.AddData(userData.ToBytes());
             }
 
-            return bw.ToArray();
+            GameServer.instance.AddMessage(index, bw.ToArray());
         }
     }
 }
