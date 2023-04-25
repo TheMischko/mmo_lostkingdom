@@ -19,7 +19,7 @@ namespace Server.MessageSenders {
             foreach (ChatMessage message in historyFragment.messages) {
                 bw.AddData(message.ToBytes());
             }
-            await Network.instance.SendToClientAsync(index, bw.ToArray());
+            GameServer.instance.AddMessage(index, bw.ToArray());
         }
     }
 }

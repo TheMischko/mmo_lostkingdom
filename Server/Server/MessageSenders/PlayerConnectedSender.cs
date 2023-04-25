@@ -10,15 +10,15 @@ namespace Server.MessageSenders {
             BufferWriter bw = new BufferWriter();
             bw.WriteInt(instruction);
             bw.AddData(newUser.ToBytes());
-
-            await Network.instance.SendToClientAsync(index, bw.ToArray());
+            
+            GameServer.instance.AddMessage(index, bw.ToArray());
         }
 
         public static async Task BroadcastMessage(UserData newUser, int[] skipIndicies) {
             BufferWriter bw = new BufferWriter();
             bw.WriteInt(instruction);
             bw.AddData(newUser.ToBytes());
-            await Network.instance.Broadcast(bw.ToArray(), skipIndicies);
+            GameServer.instance.BroadcastMessage(bw.ToArray(), skipIndicies);
         }
     }
 }

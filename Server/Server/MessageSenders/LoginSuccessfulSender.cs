@@ -11,7 +11,7 @@ namespace Server.MessageSenders {
             UserData userData = new UserData(index, username);
             bw.AddData(userData.ToBytes());
             
-            await Network.instance.SendToClientAsync(index, bw.ToArray());
+            GameServer.instance.AddMessage(index, bw.ToArray());
         }
     }
 }

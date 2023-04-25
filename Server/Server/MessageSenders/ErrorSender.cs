@@ -11,8 +11,7 @@ namespace Server.MessageSenders {
             bw.WriteInt(instruction);
             bw.WriteInt((int)type);
             bw.WriteString(message);
-
-            await Network.instance.SendToClientAsync(index, bw.ToArray());
+            GameServer.instance.AddMessage(index, bw.ToArray());
         }
     }
 }
