@@ -12,7 +12,7 @@ using Shared.DataClasses;
 namespace Server {
     public class Network {
         private const int PORT = 5500;
-        private const int MAX_PLAYERS = 100;
+        public const int MAX_PLAYERS = 100;
         
         public TcpListener serverSocket;
         public static Network instance = new Network();
@@ -58,8 +58,7 @@ namespace Server {
                     Console.WriteLine($"Incoming connection from {clients[i].ip} || index: {i}");
                     // Send welcome MSG.
                     UserData[] userData = GetConnectedPlayers().Map(c => c.userData).ToArray();
-                    byte[] welcomeMessage = ServerSendData.instance.SendWelcomeMessage(i, userData);
-                    await SendToClientAsync(i, welcomeMessage);
+                    ServerSendData.instance.SendWelcomeMessage(i, userData);
                     return;
                 }
             }
@@ -94,16 +93,6 @@ namespace Server {
             Console.WriteLine($"Sending data of size: {dataToSend.Length}");
             await stream.WriteAsync(dataToSend, 0, dataToSend.Length);
             await stream.FlushAsync();
-        }
-
-        public async Task Broadcast(byte[] data, int[] skipIndices = null) {
-            List<int> indicesToSkip = skipIndices == null ? new List<int>() : new List<int>(skipIndices);
-            for (int i = 1; i < MAX_PLAYERS; i++) {
-                if (clients[i].socket != null) {
-                    if(indicesToSkip.Contains(clients[i].index)) continue;
-                    await SendToClientAsync(i, data);
-                }
-            }
         }
     }
 }
