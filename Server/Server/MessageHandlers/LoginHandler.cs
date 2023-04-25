@@ -15,8 +15,7 @@ namespace Server.MessageHandlers {
         public static async void Handle(int index, BufferReader reader) {
             string login = reader.ReadString();
             string password = reader.ReadString();
-            Console.WriteLine($"{login} is logging in with password {password}");
-            
+
             // Handle login
             ResultInfo<User_Account> result = await UserModel.instance.Login(login, password);
             if (result.status == Status.Error) {
