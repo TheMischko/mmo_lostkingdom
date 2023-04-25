@@ -10,7 +10,7 @@ namespace Game.Movement {
         }
 
         protected void OnChangeDirection(Vector2 direction) {
-            playerController.SetDirection(direction);
+            playerController.SetDirection(direction.normalized);
         }
     }
 }
