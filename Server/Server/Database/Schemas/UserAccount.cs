@@ -12,6 +12,8 @@ namespace Database.Schemas {
         public string email { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string pasword { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string passwordSalt { get; set; }
         
         [Default(OrmLiteVariables.SystemUtc)]
         public DateTime timeRegistered { get; set; }
