@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Networking.UI;
 using Shared.DataClasses;
 using Shared.Enums;
+using UI;
 using UnityEngine;
 
 namespace Networking {
