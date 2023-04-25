@@ -16,6 +16,8 @@ namespace Server {
             packets.Add(1, RegisterHandler.Handle);
             packets.Add(2, HandleLogin);
             packets.Add(3, ChatMessageHandler.Handle);
+            
+            packets.Add(21, LoadPlayerHandler.Handle);
         }
 
 

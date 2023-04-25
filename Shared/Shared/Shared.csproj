@@ -41,6 +41,8 @@
         <Compile Include="Class1.cs" />
         <Compile Include="DataClasses\ChatMessage.cs" />
         <Compile Include="DataClasses\IBufferable.cs" />
+        <Compile Include="DataClasses\PlayerData.cs" />
+        <Compile Include="DataClasses\PlayerStats.cs" />
         <Compile Include="DataClasses\UserData.cs" />
         <Compile Include="Enums\ChatMessageType.cs" />
         <Compile Include="Enums\ErrorType.cs" />

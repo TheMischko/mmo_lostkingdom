@@ -133,12 +133,14 @@
         <Compile Include="Database\Schemas\UserAccount.cs" />
         <Compile Include="GameServer.cs" />
         <Compile Include="MessageHandlers\ChatMessageHandler.cs" />
+        <Compile Include="MessageHandlers\LoadPlayerHandler.cs" />
         <Compile Include="MessageHandlers\LoginHandler.cs" />
         <Compile Include="MessageHandlers\RegisterHandler.cs" />
         <Compile Include="MessageSenders\ChatMessageSender.cs" />
         <Compile Include="MessageSenders\ErrorSender.cs" />
         <Compile Include="MessageSenders\LoginSuccessfulSender.cs" />
         <Compile Include="MessageSenders\PlayerConnectedSender.cs" />
+        <Compile Include="MessageSenders\SelfPlayerDataSender.cs" />
         <Compile Include="MessageSenders\UserSuccessfullyCreated.cs" />
         <Compile Include="Model\ChatModel\ChatModel.cs" />
         <Compile Include="Model\UserModel\UserInputValidator.cs" />

@@ -34,10 +34,15 @@ public class MenuManager : MonoBehaviour {
         instance = this;
         _menu = Menu.Loading;
         LoginSuccessfulHandler.Happened += HideOnLogin;
+        LoadSelfHandler.Happened += SelfPlayerLoaded;
+    }
+
+    private void SelfPlayerLoaded(object sender, PlayerData e) {
+        hideMenuSig = true;
     }
 
     private void HideOnLogin(object sender, UserData e) {
-        hideMenuSig = true;
+        _menu = Menu.Loading;
     }
 
     private void Update() {
@@ -60,20 +65,6 @@ public class MenuManager : MonoBehaviour {
                     break;
             }
         }
-    }
-
-    public void SendRegisterTest() {
-        ClientSendData.instance.SendAccount("test", "email@email.com", "password");
-    }
-
-    public void SendLoginTest() {
-        ClientSendData.instance.SendLogin("test", "test123");
-    }
-
-    private void DisableMenus() {
-        loadingMenu.SetActive(false);
-        homeMenu.SetActive(false);
-        registerMenu.SetActive(false);
     }
 
     private void SwitchMenu(GameObject menuToEnable) {

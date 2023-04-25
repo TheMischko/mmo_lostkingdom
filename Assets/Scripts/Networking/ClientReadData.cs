@@ -19,6 +19,8 @@ namespace Networking {
             packets.Add(100, HandleWelcomeMessage);
             packets.Add(102, LoginSuccessfulHandler.Handle);
             
+            packets.Add(121, LoadSelfHandler.Handle);
+            
             packets.Add(200, SuccessCreatedAccountHandler.Handle);
 
             packets.Add(400, ErrorHandler.Handle);

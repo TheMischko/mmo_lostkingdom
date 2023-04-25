@@ -43,6 +43,10 @@ namespace Shared.Utils {
             return reader.ReadUInt64();
         }
 
+        public float ReadFloat() {
+            return reader.ReadSingle();
+        }
+
         public void Dispose()
         {
             reader.Dispose();

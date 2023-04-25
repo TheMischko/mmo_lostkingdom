@@ -54,14 +54,19 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\UI\LoginForm.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\SuccessCreatedAccountHandler.cs" />
+     <Compile Include="Assets\Scripts\Game\PlayerState.cs" />
      <Compile Include="Assets\Scripts\Networking\UserManager.cs" />
      <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewAccountSender.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Networking\MessageSenders\LoadMeSender.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\LoginSuccessfulHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewChatMessageSender.cs" />
      <Compile Include="Assets\Scripts\Game\Movement\PlayerInputMovement.cs" />
+     <Compile Include="Assets\Scripts\Networking\MessageSenders\MovementSender.cs" />
      <Compile Include="Assets\Scripts\Game\Movement\BaseMovement.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\NewPlayerConnectedHandler.cs" />
+     <Compile Include="Assets\Scripts\Networking\MessageHandlers\LoadSelfHandler.cs" />
      <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\LoginSender.cs" />
      <Compile Include="Assets\Scripts\Game\GameManager.cs" />
@@ -76,7 +81,6 @@
      <Compile Include="Assets\Scripts\UI\RegisterForm.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\ErrorHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
-     <Compile Include="Assets\Scripts\Game\Movement\CameraFollow.cs" />
      <None Include="Assets\ParrelSync\VERSION.txt" />
  <Reference Include="UnityEngine">
  <HintPath>E:/Program Files/Unity/2020.3.29f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

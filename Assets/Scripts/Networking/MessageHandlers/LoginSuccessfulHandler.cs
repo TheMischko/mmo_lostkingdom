@@ -1,4 +1,5 @@
 ﻿using System;
+using Networking.MessageSenders;
 using Shared.DataClasses;
 using Shared.Utils;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Networking.MessageHandlers {
             UserData user = UserData.FromBytesFactory(reader);
             UserManager.instance.SetSelf(user);
             Happened?.Invoke(null, user);
+            LoadMeSender.SendMessage();
         }
     }
 }
