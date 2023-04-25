@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Networking.MessageHandlers;
 using Networking.MessageSenders;
 using Shared.DataClasses;
+using Shared.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,12 @@ namespace UI {
             alert.Hide();
             SuccessCreatedAccountHandler.Happened += OnAccountCreatedResponse;
             NewAccountSender.SendMessage(username, email, password);
+            ErrorHandler.AddListener(ErrorType.RegistrationError, OnRegistrationError);
+        }
+
+        private void OnRegistrationError(object sender, string error) {
+            alert.ShowMessage(error, AlertType.Error);
+            ErrorHandler.RemoveListener(ErrorType.LoginError, OnRegistrationError);
         }
 
         private void OnAccountCreatedResponse(object sender, EventArgs e) {
