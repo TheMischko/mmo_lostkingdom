@@ -8,6 +8,7 @@ using Server.Model.UserModel;
 using Server.Utils;
 using ServiceStack;
 using Shared.DataClasses;
+using Shared.Enums;
 using Shared.Utils;
 
 namespace Server.MessageHandlers {
@@ -19,14 +20,14 @@ namespace Server.MessageHandlers {
             // Handle login
             ResultInfo<User_Account> result = await UserModel.instance.Login(login, password);
             if (result.status == Status.Error) {
-                // Handle error.
+                await ErrorSender.SendMessage(index, ErrorType.LoginError, result.message);
                 return;
             }
 
             Network.clients[index].userData.accountId = result.content.id;
             Network.clients[index].userData.name = result.content.login;
             
-            await LoginSuccessfulSender.SendMessage(index);
+            await LoginSuccessfulSender.SendMessage(index, result.content.login);
 
             ChatModel.instance.AddNewChatListener(index);
             
