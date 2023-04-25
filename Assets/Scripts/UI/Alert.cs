@@ -3,7 +3,7 @@ using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Networking.UI {
+namespace UI {
     public class Alert : MonoBehaviour {
         private Image image;
         private Text text;

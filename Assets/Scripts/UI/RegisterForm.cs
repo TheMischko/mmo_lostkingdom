@@ -6,7 +6,7 @@ using Shared.DataClasses;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Networking.UI {
+namespace UI {
     public class RegisterForm : MonoBehaviour {
         [SerializeField] private InputField usernameInput;
         [SerializeField] private InputField emailInput;

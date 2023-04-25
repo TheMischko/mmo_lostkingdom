@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Chat;
+using Networking;
 using Networking.MessageHandlers;
 using Shared.DataClasses;
 using Shared.Enums;
@@ -9,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Networking.UI {
+namespace UI {
     public class ChatManager : MonoBehaviour {
         public static ChatManager instance;
         

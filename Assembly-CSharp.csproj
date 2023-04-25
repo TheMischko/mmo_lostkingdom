@@ -52,7 +52,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\UserManager.cs" />
+     <Compile Include="Assets\Scripts\Networking\MessageHandlers\SuccessCreatedAccountHandler.cs" />
+     <Compile Include="Assets\Scripts\Networking\UserManager.cs" />
      <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewAccountSender.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageHandlers\LoginSuccessfulHandler.cs" />
@@ -64,12 +65,12 @@
      <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Networking\MessageSenders\NewChatMessagesHandler.cs" />
      <Compile Include="Assets\Scripts\UI\ChatManager.cs" />
+     <Compile Include="Assets\Scripts\UI\Alert.cs" />
      <Compile Include="Assets\Scripts\Networking\Network.cs" />
+     <Compile Include="Assets\Scripts\UI\RegisterForm.cs" />
      <Compile Include="Assets\Scripts\Chat\ChatColors.cs" />
      <Compile Include="Assets\Scripts\Networking\ClientSendData.cs" />
-     <Compile Include="Assets\Scripts\UI\RegisterForm.cs" />
-     <Compile Include="Assets\Scripts\UI\Alert.cs" />
-     <Compile Include="Assets\Scripts\Networking\MessageHandlers\SuccessCreatedAccountHandler.cs" />
+     <Compile Include="Assets\Scripts\UI\LoginForm.cs" />
      <None Include="Assets\ParrelSync\VERSION.txt" />
  <Reference Include="UnityEngine">
  <HintPath>E:/Program Files/Unity/2020.3.29f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
