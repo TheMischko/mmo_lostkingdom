@@ -1,7 +1,7 @@
 ﻿using System;
-using Networking.UI;
 using Shared.DataClasses;
 using Shared.Utils;
+using UI;
 using UnityEngine;
 
 namespace Networking.MessageSenders {
