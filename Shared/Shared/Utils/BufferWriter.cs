@@ -35,6 +35,10 @@ namespace Shared.Utils {
             writer.Write(dt.ToBinary());
         }
 
+        public void WriteFloat(float value) {
+            writer.Write(value);
+        }
+
         public void Dispose()
         {
             writer.Dispose();

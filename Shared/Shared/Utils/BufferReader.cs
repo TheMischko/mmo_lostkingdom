@@ -39,6 +39,10 @@ namespace Shared.Utils {
             return DateTime.FromBinary(dtBinary);
         }
 
+        public ulong ReadULong() {
+            return reader.ReadUInt64();
+        }
+
         public void Dispose()
         {
             reader.Dispose();
