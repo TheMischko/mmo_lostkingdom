@@ -43,6 +43,7 @@
         <Compile Include="DataClasses\IBufferable.cs" />
         <Compile Include="DataClasses\UserData.cs" />
         <Compile Include="Enums\ChatMessageType.cs" />
+        <Compile Include="Enums\ErrorType.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Utils\BufferReader.cs" />
         <Compile Include="Utils\BufferWriter.cs" />
