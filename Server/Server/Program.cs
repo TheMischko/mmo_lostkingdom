@@ -11,6 +11,7 @@ namespace Server {
             threadConsole = new Thread(new ThreadStart(ConsoleThread));
             threadConsole.Start();
             Network.instance.ServerStart();
+            GameServer.instance.Start();
             Database.Database.instance.Connect();
             ServerHandleData.instance.InitMessages();
         }
